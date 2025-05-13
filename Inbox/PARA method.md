@@ -17,6 +17,6 @@ With having no structure a person tends to have all their projects in their head
 
 It feels natural to separate things and putting notes in certain categories.
 But as your note-taking becomes advanced then it becomes less significant.
-In the [[Zettelkasten method]] there's no such structure.
+In [[Zettelkasten method|the Zettelkasten method]] there's no such structure.
 
 [[Note-taking]]

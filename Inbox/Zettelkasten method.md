@@ -1,0 +1,1 @@
+Everything lives in one big directory with all of your notes in there and then all of these notes are linked among each other with a system of identifiers (markdown links in Obsidian).

@@ -12,4 +12,6 @@ You do not start with a predefined structure like in [[PARA method|the PARA meth
 
 Zettelkasten is not just a note-taking system like the PARA method, but is a thinking tool.
 
+You can rearrange notes order, mix them with notes from different topics to come up with a completely new idea. You can use [[Canvas]] to do it in [[Obsidian]].
+
 [[Note-taking]]

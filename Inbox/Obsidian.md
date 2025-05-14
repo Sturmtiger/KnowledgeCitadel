@@ -18,4 +18,5 @@ Command-line focused engineers may take advantage of this by:
 - Running scripts on the files
 - Use preferred text editors (e.g. Vim)
 
+[[Obsidian configuration]]
 [[Note-taking]]

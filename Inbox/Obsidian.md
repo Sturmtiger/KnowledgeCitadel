@@ -14,6 +14,7 @@ Obsidian allows:
 - Portability (your vaults can be synchronized across different devices: PC, laptop, smartphone etc.)
 
 All your data is stored locally in Markdown files which is good for safety and brings flexibility.
+
 Command-line focused engineers may take advantage of this by:
 - Running scripts on the files
 - Use preferred text editors (e.g. Vim)

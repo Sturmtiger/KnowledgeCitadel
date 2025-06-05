@@ -8,8 +8,7 @@ We need to start limiting the information we consume in order to sharpen our min
 
 The key is intentionality and consciousness.
 
-In order to increase your productivity you should clearly divide time when you are intentional and time to relax.
+In order to increase your productivity, you should clearly separate time for focused work and time for relaxation.
 
-During intentional time you only consume content scheduled beforehand with a clear purpose.
-Use your relax time to recharge, use it wisely. Doom-scrolling, consuming brain-rot content, binge-watching TV series are NOT conducive to recharging but rather exhaust you even more.
-
+During focused work time, only consume content scheduled beforehand with a clear purpose.
+Use your relaxation time to recharge - use it wisely. Doomscrolling, consuming brain-rot content, binge-watching TV series are NOT conducive to real rest but may actually leave you even more exhausted.

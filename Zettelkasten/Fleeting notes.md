@@ -4,4 +4,5 @@ Fleeting notes are short notes taken while you are working on something or study
 
 Fleeting notes are ephemeral. They should be processed as soon as possible.
 
+[[Permanent notes]]
 [[Note-taking]]

@@ -1,6 +1,7 @@
 #note-taking
 
 **Note-taking** is the cornerstone of success. It allows people to achieve goals in record time.
+
 **Productivity** is the maximizing the output you can generate in the amount of time that you have.
 The basis of a **productivity** is a note-taking system.
 

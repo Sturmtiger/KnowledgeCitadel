@@ -1,12 +1,10 @@
 #playlist #video #note-taking
-
+## Content
 * [[Note-taking]]
-* [[Obsidian]]
 * [[PARA method]]
 * [[Zettelkasten method]]
-* [[Inbox]]
-
-Watched videos from the playlist:
+* [[Obsidian]]
+## Watched videos from the playlist
 1. [Everything Starts with a Note-taking system](https://youtu.be/Xw3SkhB4dMk?si=yE0RBNKfDubu4R2B)
 2. [Note-taking Apps for Command-line people](https://youtu.be/L1ALavX0pKo?si=M24rS7RUK3sZ9fCz)
 3. [Note-taking with the PARA method - Best for Beginners](https://youtu.be/oxUVn37-Igk?si=vaqMfWzV-3LGE546)

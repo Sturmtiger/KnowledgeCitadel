@@ -12,3 +12,5 @@ A project can transition to a [[PARA Area|area]] or an [[PARA Archive|archive]].
 In case of the **Vacation hiking** project it will transition to [[PARA Archive|archive]].
 But a project may also transition to [[PARA Area|area]].
 For example, you started a project of buying a house and then, when it's completed, the project transitions to [[PARA Area|area]], because you will have ongoing processes related to the house, like gardening and the like.
+
+[[GTD (Getting Things Done) by David Allen]]

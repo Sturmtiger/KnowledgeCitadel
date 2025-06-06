@@ -17,7 +17,6 @@ This is a course dedicated to using the [[Zettelkasten method]] in [[Obsidian]].
 * [[Using read-it-later apps to store articles]]
 * [[Note-taking and Intentionality]]
 * [[Creating Output & Using Visual Interaction with Notes]]
-* [[Tags vs Folders]]
 ## Resources
 - How to take smart notes - Sonke Ahrens
 - **[https://zettelkasten.de/](https://zettelkasten.de/)**

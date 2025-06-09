@@ -10,6 +10,7 @@ This is a course dedicated to using the [[Zettelkasten method]] in [[Obsidian]].
 * [[Fleeting notes]]
 * [[Permanent notes]]
 * [[Capturing notes properly]]
+* [[Capturing notes in Obsidian]]
 * [[Sharpening your mind]]
 * [[Input vs Output]]
 * [[Creating Consumption Backlog]]

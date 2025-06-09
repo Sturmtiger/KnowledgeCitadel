@@ -13,11 +13,11 @@ Obsidian allows:
 - Having tags on notes
 - Portability (your vaults can be synchronized across different devices: PC, laptop, smartphone etc.)
 
-All your data is stored locally in Markdown files which is good for safety and brings flexibility.
+All your data is stored locally in markdown files which is good for safety and brings flexibility.
 
 Command-line focused engineers may take advantage of this by:
 - Running scripts on the files
 - Use preferred text editors (e.g. Vim)
 
-[[Obsidian configuration]]
+[[Obsidian plugins]]
 [[Note-taking]]

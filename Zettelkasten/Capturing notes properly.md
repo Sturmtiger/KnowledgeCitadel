@@ -10,5 +10,4 @@ Highlighting text in a book, copying text from an article, and taking screenshot
 
 >Read with a pen in your hand.
 
-[[Capturing notes in Obsidian]]
 [[Note-taking]]

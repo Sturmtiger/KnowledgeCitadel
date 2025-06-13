@@ -2,7 +2,7 @@
 
 >A class should have one and only one reason to change. - Robert Martin
 
-Ask yourself a question "What the class is responsible for?", if you find yourself saying "and" that indicates your class breaks SRP.
+Ask yourself a question "What the class/component/microservice is responsible for?", if your answer includes the word "and" you're most likely breaking SRP.
 
 ## Frequency and Effects of Changes
 Requirements may change over time.
@@ -11,6 +11,7 @@ If your class implements multiple responsibilities, they are not independent, bu
 
 Having multiple responsibilities brings another issue - whenever you need to change your class, you might need to update all its dependencies, even though they are not directly affected by your change.
 The dependencies may use only one of the class' responsibilities, but you need to update them anyway.
+The class has too many dependencies because of having multiple responsibilities.
 
 In the end, you need to modify you class and its dependencies more often, and each modification is more complicated because multiple responsibilities are coupled within one class and the usage of the class in its dependencies becomes confusing.
 
@@ -48,9 +49,9 @@ class OrderTransformer(EntityTransformer):
 
 It has only one responsibility - it transforms some entity into an ORM equivalent.
 It does not validate the entity, neither it saves it into the DB. It only transform it into an ORM object.
-Thus, the EntityTransformer class is easy to grasp, implement, support and cover with tests.
+Thus, the EntityTransformer class is easy to grasp, implement, maintain and cover with tests.
 
-Avoid oversimplifying your code and taking the SRP to the extreme through.
-For example, say, the Order has transaction data within it, and we'd like to parse the object. If parsing logic is quite simple and fits into one private function it is completely fine to keep it in Transformer class, other then having multiple classes that just contain one function. Having these multiple classes lead to another problem, when writing some actual code, you would have to inject all those dependencies which makes the code less readable and confusing.
+Avoid oversimplifying your code and taking the SRP to the extreme though.
+For example, say, the Order has transaction data within it, and we'd like to parse the DTO object. If parsing logic is quite simple and fits into one private function it is completely fine to keep it in the Transformer class, other than having multiple classes that just contain one function. Having these multiple classes leads to another problem: when writing some actual code, you would have to inject all those dependencies which makes the code less readable and confusing.
 
 The SRP is an important rule but don't overuse it.

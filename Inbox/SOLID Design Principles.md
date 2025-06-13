@@ -1,6 +1,4 @@
-#article #programming #OOP #SOLID #consume
-
-[Link to the article](https://stackify.com/solid-design-principles/)
+#programming #OOP #SOLID #consume
 
 The **SOLID** principles are a set of best practices in object-oriented software development that emerged after dozens of years of cumulative development experience done by software professionals.
 

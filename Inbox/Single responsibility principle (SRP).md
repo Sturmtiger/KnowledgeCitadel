@@ -25,6 +25,7 @@ Entity transformer. It takes an entity DTO object and transform it into an ORM o
 ```
 from abc import ABC, abstactmethod
 
+
 class EntityTransformer(ABC):
 	"""Transforms an entity into an ORM object."""
 
@@ -48,3 +49,8 @@ class OrderTransformer(EntityTransformer):
 It has only one responsibility - it transforms some entity into an ORM equivalent.
 It does not validate the entity, neither it saves it into the DB. It only transform it into an ORM object.
 Thus, the EntityTransformer class is easy to grasp, implement, support and cover with tests.
+
+Avoid oversimplifying your code and taking the SRP to the extreme through.
+For example, say, the Order has transaction data within it, and we'd like to parse the object. If parsing logic is quite simple and fits into one private function it is completely fine to keep it in Transformer class, other then having multiple classes that just contain one function. Having these multiple classes lead to another problem, when writing some actual code, you would have to inject all those dependencies which makes the code less readable and confusing.
+
+The SRP is an important rule but don't overuse it.

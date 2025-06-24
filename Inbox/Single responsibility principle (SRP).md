@@ -2,56 +2,114 @@
 
 >A class should have one and only one reason to change. - Robert Martin
 
-Ask yourself a question "What the class/component/microservice is responsible for?", if your answer includes the word "and" you're most likely breaking SRP.
+Ask yourself a question "What's the class responsible for?", if your answer includes the word "and" you're most likely breaking SRP.
 
 ## Frequency and Effects of Changes
 Requirements may change over time.
 The more responsibilities the class has the more often you'll need to modify it.
-If your class implements multiple responsibilities, they are not independent, but - [[Coupling|coupled]].
+If your class implements multiple responsibilities, - they are not independent, but - coupled.
 
 Having multiple responsibilities brings another issue - whenever you need to change your class, you might need to update all its dependencies, even though they are not directly affected by your change.
-The dependencies may use only one of the class' responsibilities, but you need to update them anyway.
+
+The dependencies may use only one of the class' responsibilities, but you need to update all of them anyway.
+
 The class has too many dependencies because of having multiple responsibilities.
 
 In the end, you need to modify you class and its dependencies more often, and each modification is more complicated because multiple responsibilities are coupled within one class and the usage of the class in its dependencies becomes confusing.
 
 ## Easier to understand
-Classes, software components and microservices that have only one responsibility are much easier to explain, understand and implement.
-There's much less space for bugs, it improves your developments speed and testing.
+Classes that have only one responsibility are much easier to explain, understand and implement.
+There's much less space for bugs, it improves your developments speed, and covering such a class with tests is much easier.
 
-# An example of SRP
-
-Entity transformer. It takes an entity DTO object and transform it into an ORM object.
-
+## Example
+### ❌ SRP violation
 ```
-from abc import ABC, abstactmethod
+class Report:
+    def __init__(self, title: str, content: str) -> None:
+        self.title = title
+        self.content = content
+
+    def format_html(self) -> str:
+        return f"<html><head><title>{self.title}</title></head><body>{self.content}</body></html>"
+
+    def save_to_file(self, filename: str) -> None:
+	    with open(filename, "w") as file:
+            file.write(self.format_html())
 
 
-class EntityTransformer(ABC):
-	"""Transforms an entity into an ORM object."""
+if __name__ == "__main__":
+    report = Report("Expenses", "Expenses details")
+    report.save_to_file()
+```
+####  What's wrong?
+`Report` has the following responsibilities:
+1. Representing the data of a report ✅
+2. Handling formatting (HTML) ❌
+3. Handling persistence (saving to file) ❌
+Whenever any of these responsibilities' requirements change - the class changes.
+### ✅ SRP compliant version
+Responsibilities are split into different classes.
+```
+class Report:
+    def __init__(self, title: str, content: str) -> None:
+        self.title = title
+        self.content = content
 
-	@abstactmethod
-	def transform(self) -> None:
-		pass
+
+class HtmlFormatter:
+    def format(report: Report) -> str:
+        return f"<html><head><title>{report.title}</title></head><body>{report.content}</body></html>"
 
 
-class ItemTransformer(EntityTransformer):
-	"""Transforms an item into an ORM object."""
-	def transform(self) -> None:
-		# do stuff
+class FileSaver:
+    def save(self, html_content: str, filename: str) -> None:
+	    with open(filename, "w") as file:
+            file.write(html_content)
 
 
-class OrderTransformer(EntityTransformer):
-	"""Transforms an order into an ORM object."""
-	def transform(self) -> None:
-		# do stuff
+if __name__ == "__main__":
+    report = Report("Expenses", "Expenses details")
+    formatter = HtmlFormatter()
+    saver = FileSaver()
+
+    html_content = formatter.format(report)
+    saver.save(html_content, "report.html")
 ```
 
-It has only one responsibility - it transforms some entity into an ORM equivalent.
-It does not validate the entity, neither it saves it into the DB. It only transform it into an ORM object.
-Thus, the EntityTransformer class is easy to grasp, implement, maintain and cover with tests.
-
+Now, each class clearly adheres to one responsibility:
+- `Report`: holds report data ✅
+- `HTMLFormatter`: formats the report to HTML ✅
+- `ReportSaver`: handles saving the formatted report to a file ✅
+## Caution
 Avoid oversimplifying your code and taking the SRP to the extreme though.
-For example, say, the Order has transaction data within it, and we'd like to parse the DTO object. If parsing logic is quite simple and fits into one private function it is completely fine to keep it in the Transformer class, other than having multiple classes that just contain one function. Having these multiple classes leads to another problem: when writing some actual code, you would have to inject all those dependencies which makes the code less readable and confusing.
+### Overusing SRP
+Let's take HTML formatting logic to demonstrate how SRP can be pushed to an extreme, creating separate classes for trivial tasks that actually can and should live in one class.
+```
+class HtmlTitleFormatter:
+    def format(title: str) -> str:
+        return f"<title>{title}</title>"
 
-The SRP is an important rule but don't overuse it.
+
+class HtmlBodyFormatter:
+    def format(content: str) -> str:
+        return f"<body>{content}</body>"
+
+
+class HtmlReportAssembler:
+    def assemble(title: str, body: str) -> str:
+        return f"<html><head>{title}</head>{body}</html>"
+
+
+if __name__ == "__main__":
+    title_formatter = HtmlTitleFormatter()
+    body_formatter = HtmlBodyFormatter()
+    report_assembler = HtmlReportAssembler()
+
+    title_html = title_formatter.format(report.title)
+    body_html = body_formatter.format(report.content)
+    report_html = HTMLReportAssembler.assemble(title_html, body_html)
+
+```
+This design demonstrates excessive complexity and overhead without meaningful benefit. Having multiple tiny classes, each responsible for trivial functionality, complicates understanding, maintaining. and reduces readability.
+
+The SRP is an important rule but don't overuse it. Keep it balanced!

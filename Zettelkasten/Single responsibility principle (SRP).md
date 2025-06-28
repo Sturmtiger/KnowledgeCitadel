@@ -1,29 +1,24 @@
 #SOLID #SRP
 
 >A class should have one and only one reason to change. - Robert Martin
-
-Ask yourself a question "What's the class responsible for?", if your answer includes the word "and" you're most likely breaking SRP.
-
-## Frequency and Effects of Changes
+## Consequences of Violating SRP
 Requirements may change over time.
-The more responsibilities the class has the more often you'll need to modify it.
-If your class implements multiple responsibilities, - they are not independent, but - coupled.
+The more responsibilities a class has, the more often you'll need to modify it.
+If your class implements multiple responsibilities, they are not independent, and tend to be coupled.
 
-Having multiple responsibilities brings another issue - whenever you need to change your class, you might need to update all its dependencies, even though they are not directly affected by your change.
-
-The dependencies may use only one of the class' responsibilities, but you need to update all of them anyway.
+Having multiple responsibilities brings another issue: whenever you need to change your class, you might also need to update all its dependencies, even if they are not directly affected by your change.
+The dependencies may use only one of the class's responsibilities, but you need to update all of them.
 
 The class has too many dependencies because of having multiple responsibilities.
 
-In the end, you need to modify you class and its dependencies more often, and each modification is more complicated because multiple responsibilities are coupled within one class and the usage of the class in its dependencies becomes confusing.
-
-## Easier to understand
+In the end, you need to modify your class and its dependencies more often, and each modification is more complicated because multiple responsibilities are coupled within one class.
+It also makes the class's usage in its dependencies more confusing.
+## Pros of SRP adherence
 Classes that have only one responsibility are much easier to explain, understand and implement.
-There's much less space for bugs, it improves your developments speed, and covering such a class with tests is much easier.
-
-## Example
-### ❌ SRP violation
-```
+There's much less room for bugs, development becomes faster, and testing such a class is easier.
+## Code Examples
+### ❌ SRP Violation
+```python
 class Report:
     def __init__(self, title: str, content: str) -> None:
         self.title = title
@@ -44,12 +39,12 @@ if __name__ == "__main__":
 ####  What's wrong?
 `Report` has the following responsibilities:
 1. Representing the data of a report ✅
-2. Handling formatting (HTML) ❌
-3. Handling persistence (saving to file) ❌
-Whenever any of these responsibilities' requirements change - the class changes.
-### ✅ SRP compliant version
-Responsibilities are split into different classes.
-```
+2. Handling formatting (HTML) ⚠️
+3. Handling persistence (saving to file) ⚠️
+Whenever the requirements of any of these responsibilities change, the class must be modified.
+### ✅ SRP-Compliant version
+Each responsibility is delegated to a separate class.
+```python
 class Report:
     def __init__(self, title: str, content: str) -> None:
         self.title = title
@@ -79,12 +74,10 @@ if __name__ == "__main__":
 Now, each class clearly adheres to one responsibility:
 - `Report`: holds report data ✅
 - `HTMLFormatter`: formats the report to HTML ✅
-- `ReportSaver`: handles saving the formatted report to a file ✅
-## Caution
-Avoid oversimplifying your code and taking the SRP to the extreme though.
-### Overusing SRP
-Let's take HTML formatting logic to demonstrate how SRP can be pushed to an extreme, creating separate classes for trivial tasks that actually can and should live in one class.
-```
+- `FileSaver`: handles saving the formatted report to a file ✅
+### ❌ Overusing SRP
+Let's use HTML formatting logic to demonstrate how SRP can be taken to an extreme by creating separate classes for trivial tasks that could, and should, live in a single class.
+```python
 class HtmlTitleFormatter:
     def format(title: str) -> str:
         return f"<title>{title}</title>"
@@ -110,6 +103,6 @@ if __name__ == "__main__":
     report_html = HTMLReportAssembler.assemble(title_html, body_html)
 
 ```
-This design demonstrates excessive complexity and overhead without meaningful benefit. Having multiple tiny classes, each responsible for trivial functionality, complicates understanding, maintaining. and reduces readability.
+This design demonstrates excessive complexity and overhead without meaningful benefit. Having multiple tiny classes, each responsible for trivial functionality, makes the code harder to understand, maintain, and read.
 
-The SRP is an important rule but don't overuse it. Keep it balanced!
+SRP is important but don't oversimplify your code by taking SRP to an extreme. Keep it balanced!

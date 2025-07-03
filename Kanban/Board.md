@@ -10,19 +10,21 @@ kanban-plugin: board
 
 ## To Do
 
-- [ ] Finish **Secure Workflow Data** section
-	#github-actions #course
-- [ ] 100 push-ups and 100 squats with a bulgarian bag
-	#sport
+- [ ] Practice English with chat GPT voice mode
+	#english
 
 
 ## In Progress
 
+- [ ] Finish **Secure Workflow Data** section
+	#github-actions #course
 
 
 ## Complete
 
 **Complete**
+- [ ] 100 push-ups and 50 squats with a bulgarian bag
+	#sport
 - [ ] Refine [[Liskov substitution principle (LSP)]] and move it to the Zettelkasten
 	#SOLID #LSP
 - [x] Practice vocabulary from the speaking club

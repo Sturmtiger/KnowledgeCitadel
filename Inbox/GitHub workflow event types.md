@@ -1,4 +1,4 @@
-#github #event 
+#github #github-workflow 
 
 There's a lot of them and, but for your certification you need to know the most common ones.
 - Push events (pushing code into a branch, merging a PR. The push and a commit are events that can trigger workflows). Use cases: Running tests after every push occurs to a branch, Deployment code to a staging environment
@@ -9,7 +9,7 @@ There's a lot of them and, but for your certification you need to know the most 
 - Scheduled events (cron scheduling)
 - Webhook events (an HTTP request from an external service to trigger off GitHub, e.g. you can have a build happening in AWS/Azure or another build system and the results from there would then send an HTTP webhook into your repo, and that would be an event that then trips off (triggers) a particular workflow file)
 ## workflow.yaml file example
-```
+```yml
 # Workflow runs when a new commit is pushed to the main or development branch.
 
 on:

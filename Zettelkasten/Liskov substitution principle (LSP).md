@@ -1,26 +1,22 @@
 #SOLID #LSP
 
-The LSP states:
+LSP states:
 > Let Φ(x) be a property provable about objects x of type T. Then Φ(y) should be true for objects y of type S where S is a subtype of T.
 
-The principle defines that objects of a superclass shall be replaceable with objects of its subclasses without breaking the application.
+The principle states that objects of a superclass shall be replaceable with objects of its subclasses without breaking the application.
+That requires subclass objects to behave in the same way as superclass objects.
 
-That requires the objects of your superclass to behave in the same way as the objects of your subclasses.
-That means you can implement less restrictive validation rules, but you are not allowed to enforce stricter ones in your subclass. Otherwise, the code that calls this method on an object of the superclass might cause an exception if it gets called with a object of the subclass.
+That means you may implement less restrictive validation rules, but must not enforce stricter ones in a subclass. Otherwise, code that expects a superclass instance may raise an exception when it interacts with a subclass instance.
 
-Similar rules apply to the return value of the method. The return value of a method of the subclass must comply with the same rules as the return value of the method of the superclass.
-You can only decide to apply even stricter rules by returning a specific subclass of the defined return value, or by returning a subset of the valid return values of the superclass.
+Similar rules apply to method return values.
+A method in the subclass must return values compatible with those returned by the superclass method.
+You can only decide to apply even stricter rules by returning a specific subclass of the original return value, or by returning a subset of the valid return values defined by the superclass.
+## Code examples
+### Rectangle and Square
+A rectangle's height and width may be any values.
+A square is a rectangle in which the height and width are equal.
 
-
-==Showcase different example of the LSP violation: Rectangular and Square, CoffeeMachine, Notification system.==
-
-## Example 1. Rectangle and Square.
-
-A rectangle's height may be any value and width can be any value.
-A square is a rectangle with equal width and height.
-
-Technically, it seems correct to derive a Square class from a Rectangle class. But let's see how it breaks the LSP in practice.
-
+Technically, it may seem correct to derive a `Square` class from a `Rectangle` class, but let's see how it breaks LSP in practice.
 ```python
 class Rectangle:
 	def __init__(self, width: float, height: float) -> None:
@@ -48,8 +44,8 @@ class Square(Rectangle):
     def height(self, value: float) -> None:
 	    self._height = self._width = value
 ```
-### ❌ Problem
-Code that works with a `Rectangle` assumes width and height are independent. But if you pass a `Square`, changing one affects both.
+#### ❌ Problem
+Code that works with `Rectangle` assumes the width and height are independent. But if you pass `Square`, changing one affects both.
 ```python
 def resize_and_calc_area(rect: Rectangle) -> float:
 	rect.width = 5
@@ -61,9 +57,8 @@ def resize_and_calc_area(rect: Rectangle) -> float:
 resize_and_calc_area(Rectangle(1, 1))  # 50 ✅
 resize_and_calc_area(Square(1, 1))  # 100 ❌
 ```
-
-### ✅ Solution
-Avoid inheritance when it doesn't represent "**is-a**".
+#### ✅ Solution
+Avoid inheritance when it doesn't represent "[is-a](https://en.wikipedia.org/wiki/Is-a)".
 ```python
 from abc import ABC, abstractmethod
 
@@ -91,7 +86,7 @@ class Rectangle(Shape):
 		self._height = value
 
 
-class Square(Rectangle):
+class Square(Shape):
 	def __init__(self, size: float) -> None:
 		self._size = size
 
@@ -103,7 +98,7 @@ class Square(Rectangle):
         self._size = value
 ```
 Now, the inheritance is correct!
-## Example 2. Birds.
+### Birds
 ```python
 from abc import ABC, abstractmethod
 
@@ -124,7 +119,7 @@ class Penguin(Bird):
         raise Exception("Penguins can't fly!")
 
 ```
-### ❌ Problem
+#### ❌ Problem
 ```python
 def make_bird_fly(bird: Bird):
     bird.fly()
@@ -132,18 +127,17 @@ def make_bird_fly(bird: Bird):
 make_bird_fly(Sparrow())  # OK
 make_bird_fly(Penguin())  # ❌ Runtime exception!
 ```
-- Code expects a `Bird` and calling `fly()` will crash when a `Penguin` is passed.
-- `Penguin` is not **substitutable** for `Bird` - it breaks the LSP.
-
-### ✅ Solution
-Restructure the class hierarchy. Not all birds fly. Ergo, the `fly()` method should be defined in `Bird`.
+- Code expects the `Bird` and calling `fly()` will crash when the `Penguin` is passed.
+- The `Penguin` is not **substitutable** for the `Bird` - it breaks LSP.
+#### ✅ Solution
+Restructure the class hierarchy. Not all birds fly. Ergo, the `fly()` method should not be defined in `Bird`.
 
 ```python
 from abc import ABC, abstractmethod
 
 
 class Bird(ABC):
-    def lay_eggs(self):  # Just an example of what can be defined in Bird.
+    def lay_eggs(self):
         print("Lays eggs.")
 
 
@@ -163,5 +157,5 @@ class Penguin(Bird):
         print("Penguin is swimming.")
 
 ```
-- No `Bird` is **forced** to have  the `fly()` method unless it makes sense.
-- Now, you can safely substitute `Sparrow` where a `FlyingBird` is expected, and `Penguin` where a `Bird` is expected — **no surprises**. ==Take a look==❗
+- No `Bird` is **forced** to have  the `fly()` method.
+- Now, you can safely substitute `Sparrow` where `FlyingBird` is expected, and `Penguin` where  `Bird` is expected - **no surprises**.

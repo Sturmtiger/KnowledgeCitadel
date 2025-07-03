@@ -1,1 +1,0 @@
-Many potentially blocking or long-running operations, such as I/O, image processing, and [NumPy](https://wiki.python.org/moin/NumPy) number crunching, happen _outside_ the GIL.

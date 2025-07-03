@@ -1,8 +1,10 @@
-#github #action
+#github #github-action
 
 An action is a script that you invoke within a [[GitHub workflow|workflow]].
 
-```
+It's a pre-built script that provides reusable functionality.
+
+```yml
 on:
   push:
     branches: [ main ]

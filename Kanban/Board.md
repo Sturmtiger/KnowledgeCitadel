@@ -16,8 +16,6 @@ kanban-plugin: board
 
 ## In Progress
 
-- [ ] Finish **Secure Workflow Data** section
-	#github-actions #course
 
 
 ## Complete
@@ -44,6 +42,8 @@ kanban-plugin: board
 	#english
 - [x] Practice new vocabulary with chat GPT
 	#english
+- [x] Finish **Secure Workflow Data** section
+	#github-actions #course
 
 
 
